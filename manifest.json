@@ -1,0 +1,10 @@
+{
+  "id": "artificial-mohadith",
+  "name": "Artificial Mohadith",
+  "version": "0.0.1",
+  "minAppVersion": "1.4.0",
+  "description": "An Obsidian plugin providing a Gemini-powered chat panel with Markdown rendering, settings, and shortcuts.",
+  "author": "Code Copilot",
+  "authorUrl": "",
+  "isDesktopOnly": false
+}

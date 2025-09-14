@@ -1,0 +1,42 @@
+.gemini-chat {
+  padding: 10px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.gemini-msg {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.gemini-msg-user {
+  background-color: var(--interactive-accent);
+  color: white;
+  text-align: right;
+}
+
+.gemini-msg-assistant {
+  background-color: var(--background-secondary);
+}
+
+.gemini-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.gemini-input {
+  width: 100%;
+  min-height: 60px;
+}
+
+.gemini-send-btn {
+  align-self: flex-end;
+}
+
+.gemini-loading {
+  font-style: italic;
+  color: var(--text-muted);
+}
