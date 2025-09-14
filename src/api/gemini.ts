@@ -1,41 +1,29 @@
-import { GeminiSettings } from '../settings';
+import { GeminiSettings } from "../settings";
+import { GoogleGenAI } from "@google/genai";
 
-export async function callGemini(settings: GeminiSettings, prompt: string): Promise<string> {
-  const { apiKey, model, temperature } = settings;
-  const url = `https://generativelanguage.googleapis.com/v1beta/${model}:generateContent?key=${apiKey}`;
+export async function callGemini(
+  settings: GeminiSettings,
+  prompt: string
+): Promise<string> {
+  const { apiKey, model } = settings;
 
-  const body = {
+  const ai = new GoogleGenAI({ apiKey });
+
+  const response = await ai.models.generateContent({
+    model,
     contents: [
       {
-        role: 'user',
-        parts: [{ text: prompt }],
+        text: prompt,
       },
     ],
-    generationConfig: {
-      temperature,
-    },
-  };
-
-  const resp = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
   });
 
-  if (!resp.ok) {
-    throw new Error(`Gemini API error: ${resp.status} ${resp.statusText}`);
-  }
-
-  const data = await resp.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  return text || 'No response';
+  return response.text || "No response";
 }
 
 export async function testApiKey(settings: GeminiSettings): Promise<boolean> {
   try {
-    const result = await callGemini(settings, 'ping');
+    const result = await callGemini(settings, "ping");
     return !!result;
   } catch (e) {
     console.error(e);
